@@ -1,7 +1,7 @@
 {
-  "name": "OFFpolice | Digital Business Card",
-  "short_name": "OFFpolice",
-  "description": "Interactive responsive digital business card for OFFpolice",
+  "name": "OFFpolice.pro",
+  "short_name": "OFFpolice.pro",
+  "description": "OFFpolice official digital card and vlog",
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
