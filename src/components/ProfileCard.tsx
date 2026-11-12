@@ -7,6 +7,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { Translations } from '../types';
+import avatarImg from '../assets/offpolice.webp';
 
 interface ProfileCardProps {
   t: Translations;
@@ -16,6 +17,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
   t,
 }) => {
   const [copiedLink, setCopiedLink] = useState(false);
+  const [avatarSrc, setAvatarSrc] = useState<string>(avatarImg);
 
   const handleCopyLink = () => {
     const targetUrl = 'https://offpolice.pro/';
@@ -67,10 +69,17 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
         <div className="relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
           <div className="w-full h-full rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 shadow-sm">
             <img
-              src="/offpolice.webp"
+              src={avatarSrc}
               alt="OFFpolice"
               className="w-full h-full object-cover rounded-full"
               referrerPolicy="no-referrer"
+              onError={() => {
+                if (avatarSrc !== './offpolice.webp' && avatarSrc !== '/offpolice.webp') {
+                  setAvatarSrc('./offpolice.webp');
+                } else if (avatarSrc === './offpolice.webp') {
+                  setAvatarSrc('/offpolice.webp');
+                }
+              }}
             />
           </div>
           <div
