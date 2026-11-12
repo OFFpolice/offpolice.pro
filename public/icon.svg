@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Outer subtle tech ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#accentGrad)" stroke-width="4" stroke-opacity="0.3" stroke-dasharray="16 8" />
+  <circle cx="256" cy="256" r="185" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4" />
+
+  <!-- Glowing polygon badge / shield -->
+  <polygon points="256,110 380,170 380,290 256,400 132,290 132,170" fill="#0f172a" stroke="url(#accentGrad)" stroke-width="12" filter="url(#glow)" />
+
+  <!-- Inner polygon -->
+  <polygon points="256,132 356,182 356,278 256,370 156,278 156,182" fill="#1e1b4b" opacity="0.8" />
+
+  <!-- Emblem / Police & Cyber Badge: Letter 'O' and 'P' combined or stylized cyber wings -->
+  <path d="M200 180 H285 C315 180 330 195 330 220 C330 245 315 260 285 260 H235 V330 H195 V180 Z M235 224 H280 C293 224 298 217 298 220 C298 223 293 228 280 228 H235 V224 Z" fill="url(#shieldGrad)" />
+  
+  <!-- Cyber 2077 Star & Slash -->
+  <polygon points="256,280 262,295 278,295 265,305 270,320 256,310 242,320 247,305 234,295 250,295" fill="#38bdf8" />
+  <circle cx="256" cy="220" r="16" fill="#a855f7" opacity="0.8" />
+
+  <!-- Digital dots -->
+  <circle cx="170" cy="220" r="5" fill="#38bdf8" />
+  <circle cx="342" cy="220" r="5" fill="#a855f7" />
+  <circle cx="256" cy="155" r="4" fill="#22d3ee" />
+</svg>

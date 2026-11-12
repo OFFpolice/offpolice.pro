@@ -1,0 +1,6 @@
+# robots.txt for OFFpolice Digital Card
+User-agent: *
+Allow: /
+
+Sitemap: https://ais-pre-msvlswfiasp2mzqkss6of7-723214371739.europe-west2.run.app/sitemap.xml
+Sitemap: /sitemap.xml

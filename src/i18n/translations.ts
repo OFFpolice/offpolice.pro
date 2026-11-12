@@ -1,0 +1,115 @@
+import { Language, Translations, SocialLink } from '../types';
+
+export const SOCIAL_LINKS: SocialLink[] = [
+  {
+    id: 'telegram',
+    name: 'Telegram',
+    handle: '@OFFpolice',
+    url: 'https://telegram.me/OFFpolice',
+    badge: {
+      en: 'Direct Messaging',
+      ru: 'Прямой контакт',
+      uk: 'Прямий контакт',
+    },
+    description: {
+      en: 'Direct communication, inquiries, and private messages.',
+      ru: 'Прямая связь, рабочие вопросы и сообщения.',
+      uk: 'Прямий звʼязок, робочі запитання та повідомлення.',
+    },
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    handle: '@offpolice2077',
+    url: 'https://www.instagram.com/offpolice2077',
+    badge: {
+      en: 'Visual Portfolio',
+      ru: 'Портфолио и фото',
+      uk: 'Портфоліо та фото',
+    },
+    description: {
+      en: 'Photography, creative archives, and updates.',
+      ru: 'Фотографии, архив проектов и визуальные обновления.',
+      uk: 'Фотографії, архів проєктів та візуальні оновлення.',
+    },
+  },
+  {
+    id: 'x',
+    name: 'X',
+    handle: '@OFFpolice2077',
+    url: 'https://x.com/OFFpolice2077',
+    badge: {
+      en: 'Microblog',
+      ru: 'Микроблог',
+      uk: 'Мікроблог',
+    },
+    description: {
+      en: 'Notes, discussions, technology, and public posts.',
+      ru: 'Заметки, обсуждения технологий и публикации.',
+      uk: 'Нотатки, обговорення технологій та публікації.',
+    },
+  },
+];
+
+export const TRANSLATIONS: Record<Language, Translations> = {
+  en: {
+    appTitle: 'OFFpolice — Contact Card',
+    role: 'Digital Projects & Independent Research',
+    statusOnline: 'Available',
+    shortBio:
+      'Official contact card. Direct links to verified social networks, instant messaging, and contact details.',
+    writeButton: 'Message',
+    projectsButton: 'Projects',
+    copied: 'Copied',
+    copyLink: 'Copy URL',
+    copyHandle: 'Copy Handle',
+    visitProfile: 'Open',
+    projectsTitle: 'Projects',
+    openProject: 'Open',
+    close: 'Close',
+    themeToggle: 'Toggle theme',
+    languageSelect: 'Language',
+    footerRights: 'All rights reserved.',
+    verifiedBadge: 'Verified',
+  },
+  ru: {
+    appTitle: 'OFFpolice — Визитная карточка',
+    role: 'Цифровые проекты и независимые исследования',
+    statusOnline: 'Доступен',
+    shortBio:
+      'Официальная визитная карточка. Прямые ссылки на подтвержденные социальные профили, мгновенные сообщения и контактные данные.',
+    writeButton: 'Написать',
+    projectsButton: 'Проекты',
+    copied: 'Скопировано',
+    copyLink: 'Скопировать URL',
+    copyHandle: 'Скопировать ник',
+    visitProfile: 'Открыть',
+    projectsTitle: 'Projects',
+    openProject: 'Открыть',
+    close: 'Закрыть',
+    themeToggle: 'Сменить тему',
+    languageSelect: 'Язык',
+    footerRights: 'Все права защищены.',
+    verifiedBadge: 'Подтвержден',
+  },
+  uk: {
+    appTitle: 'OFFpolice — Візитна картка',
+    role: 'Цифрові проєкти та незалежні дослідження',
+    statusOnline: 'Доступний',
+    shortBio:
+      'Офіційна візитна картка. Прямі посилання на підтверджені соціальні мережі, повідомлення та контактні дані.',
+    writeButton: 'Написати',
+    projectsButton: 'Проєкти',
+    copied: 'Скопійовано',
+    copyLink: 'Скопіювати URL',
+    copyHandle: 'Скопіювати нік',
+    visitProfile: 'Відкрити',
+    projectsTitle: 'Projects',
+    openProject: 'Відкрити',
+    close: 'Закрити',
+    themeToggle: 'Змінити тему',
+    languageSelect: 'Мова',
+    footerRights: 'Усі права захищено.',
+    verifiedBadge: 'Підтверджено',
+  },
+};

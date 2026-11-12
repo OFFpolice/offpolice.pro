@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>OFFpolice | Digital Business Card</title>
+    <meta name="description" content="Interactive responsive digital business card for OFFpolice with Telegram, Instagram, and X social links, dark/light theme, and multi-language localization." />
+    
+    <!-- Robots & Indexing for Google and search engines -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="OFFpolice | Digital Business Card" />
+    <meta property="og:description" content="Interactive responsive digital business card for OFFpolice with Telegram, Instagram, and X social links, dark/light theme, and multi-language localization." />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@OFFpolice2077" />
+    <meta name="keywords" content="OFFpolice, OFFpolice2077, Telegram OFFpolice, Instagram offpolice2077, X OFFpolice2077, digital business card" />
+
+    <!-- Schema.org JSON-LD for Google Search Console & Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "OFFpolice",
+        "alternateName": "OFFpolice2077",
+        "identifier": "offpolice2077",
+        "description": "OFFpolice official digital contact card with links to verified Telegram, Instagram, and X profiles.",
+        "sameAs": [
+          "https://telegram.me/OFFpolice",
+          "https://www.instagram.com/offpolice2077",
+          "https://x.com/OFFpolice2077"
+        ]
+      }
+    }
+    </script>
+    
+    <!-- Browser Theme & Status Bar Color Synchronization -->
+    <meta name="theme-color" content="#09090b" id="meta-theme-color" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" id="meta-theme-color-light" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b" id="meta-theme-color-dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" id="meta-apple-status-bar" />
+    <meta name="msapplication-navbutton-color" content="#09090b" id="meta-ms-nav-color" />
+    
+    <!-- Web App Manifest for Android Chrome & Desktop PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    
+    <!-- Telegram WebApp SDK support for in-app browser & mini app header synchronization -->
+    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
+    
+    <!-- Instant pre-render theme & browser address/status bar synchronization -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('offpolice_theme');
+          var isDark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var color = isDark ? '#09090b' : '#ffffff';
+          var root = document.documentElement;
+
+          if (isDark) {
+            root.classList.add('dark');
+            root.style.colorScheme = 'dark';
+          } else {
+            root.classList.remove('dark');
+            root.style.colorScheme = 'light';
+          }
+
+          var metas = document.querySelectorAll('meta[name="theme-color"]');
+          for (var i = 0; i < metas.length; i++) {
+            metas[i].setAttribute('content', color);
+          }
+          var msMeta = document.getElementById('meta-ms-nav-color');
+          if (msMeta) msMeta.setAttribute('content', color);
+          var appleMeta = document.getElementById('meta-apple-status-bar');
+          if (appleMeta) appleMeta.setAttribute('content', isDark ? 'black-translucent' : 'default');
+
+          if (window.Telegram && window.Telegram.WebApp) {
+            var tg = window.Telegram.WebApp;
+            var isTg = Boolean(
+              (tg.initData && tg.initData.length > 0) ||
+              (tg.platform && tg.platform !== 'unknown') ||
+              (window.location && window.location.hash && window.location.hash.indexOf('tgWebAppData') !== -1)
+            );
+            if (isTg) {
+              root.classList.add('is-telegram-app');
+            }
+            var isVer = function(v) {
+              try { return typeof tg.isVersionAtLeast === 'function' && tg.isVersionAtLeast(v); } catch(e) { return false; }
+            };
+            try { if (typeof tg.ready === 'function') tg.ready(); } catch(e){}
+            try { if (typeof tg.expand === 'function') tg.expand(); } catch(e){}
+            try { if (isVer('6.2') && typeof tg.enableClosingConfirmation === 'function') tg.enableClosingConfirmation(); } catch(e){}
+            try { if (isVer('7.7') && typeof tg.disableVerticalSwipes === 'function') tg.disableVerticalSwipes(); } catch(e){}
+            try { if (isVer('8.0') && typeof tg.lockOrientation === 'function') tg.lockOrientation('portrait'); } catch(e){}
+            try { if (isVer('8.0') && typeof tg.requestFullscreen === 'function') tg.requestFullscreen(); } catch(e){}
+            try { if (isVer('6.1') && typeof tg.setHeaderColor === 'function') tg.setHeaderColor(color); } catch(e){}
+            try { if (isVer('6.1') && typeof tg.setBackgroundColor === 'function') tg.setBackgroundColor(color); } catch(e){}
+            try { if (isVer('7.10') && typeof tg.setBottomBarColor === 'function') tg.setBottomBarColor(color); } catch(e){}
+
+            var safeTop = (tg.safeAreaInset && tg.safeAreaInset.top) || 0;
+            var safeBottom = (tg.safeAreaInset && tg.safeAreaInset.bottom) || 0;
+            var safeLeft = (tg.safeAreaInset && tg.safeAreaInset.left) || 0;
+            var safeRight = (tg.safeAreaInset && tg.safeAreaInset.right) || 0;
+
+            var contentTop = (tg.contentSafeAreaInset && tg.contentSafeAreaInset.top) || 0;
+            var contentBottom = (tg.contentSafeAreaInset && tg.contentSafeAreaInset.bottom) || 0;
+            var contentLeft = (tg.contentSafeAreaInset && tg.contentSafeAreaInset.left) || 0;
+            var contentRight = (tg.contentSafeAreaInset && tg.contentSafeAreaInset.right) || 0;
+
+            root.style.setProperty('--tg-safe-area-inset-top', safeTop + 'px');
+            root.style.setProperty('--tg-safe-area-inset-bottom', safeBottom + 'px');
+            root.style.setProperty('--tg-safe-area-inset-left', safeLeft + 'px');
+            root.style.setProperty('--tg-safe-area-inset-right', safeRight + 'px');
+
+            root.style.setProperty('--tg-content-safe-area-inset-top', contentTop + 'px');
+            root.style.setProperty('--tg-content-safe-area-inset-bottom', contentBottom + 'px');
+            root.style.setProperty('--tg-content-safe-area-inset-left', contentLeft + 'px');
+            root.style.setProperty('--tg-content-safe-area-inset-right', contentRight + 'px');
+            root.style.setProperty('--safe-area-top', safeTop + 'px');
+            root.style.setProperty('--safe-area-bottom', Math.max(safeBottom, contentBottom) + 'px');
+            root.style.setProperty('--safe-area-left', Math.max(safeLeft, contentLeft) + 'px');
+            root.style.setProperty('--safe-area-right', Math.max(safeRight, contentRight) + 'px');
+
+            root.style.setProperty('--content-safe-area-top', (contentTop || safeTop) + 'px');
+            root.style.setProperty('--content-safe-area-bottom', Math.max(safeBottom, contentBottom) + 'px');
+            root.style.setProperty('--content-safe-area-left', Math.max(safeLeft, contentLeft) + 'px');
+            root.style.setProperty('--content-safe-area-right', Math.max(safeRight, contentRight) + 'px');
+
+            var isFs = Boolean(tg.isFullscreen || safeTop > 0);
+            var maxSide = Math.max(safeLeft, safeRight, contentLeft, contentRight, isFs ? 72 : 16);
+            root.style.setProperty('--header-side-clearance', maxSide + 'px');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen transition-colors duration-150">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

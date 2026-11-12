@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    color-scheme: light;
+    background-color: #ffffff;
+
+    /* Telegram WebApp & System Safe Area CSS variables (matching screenshot: tg-safe-area & tg-content-safe-area) */
+    --tg-safe-area-inset-top: 0px;
+    --tg-safe-area-inset-bottom: 0px;
+    --tg-safe-area-inset-left: 0px;
+    --tg-safe-area-inset-right: 0px;
+    --tg-content-safe-area-inset-top: 0px;
+    --tg-content-safe-area-inset-bottom: 0px;
+    --tg-content-safe-area-inset-left: 0px;
+    --tg-content-safe-area-inset-right: 0px;
+
+    /* Base / System Safe Area (for hardware notch, status bar, home bar - tg-safe-area) */
+    --safe-area-top: max(env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px));
+    --safe-area-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px), var(--tg-content-safe-area-inset-bottom, 0px));
+    --safe-area-left: max(env(safe-area-inset-left, 0px), var(--tg-safe-area-inset-left, 0px), var(--tg-content-safe-area-inset-left, 0px));
+    --safe-area-right: max(env(safe-area-inset-right, 0px), var(--tg-safe-area-inset-right, 0px), var(--tg-content-safe-area-inset-right, 0px));
+
+    /* Content Safe Area (below Telegram's top controls / tg-content-safe-area) */
+    --content-safe-area-top: max(var(--tg-content-safe-area-inset-top, 0px), var(--safe-area-top));
+    --content-safe-area-bottom: var(--safe-area-bottom);
+    --content-safe-area-left: var(--safe-area-left);
+    --content-safe-area-right: var(--safe-area-right);
+
+    /* Symmetrical clearance for Telegram Mini App header navigation controls (Close / Menu / Back) */
+    --header-side-clearance: max(var(--safe-area-left), var(--safe-area-right), 4.5rem);
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background-color: #09090b;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100%;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  html.dark body {
+    background-color: #09090b;
+  }
+
+  /* Safe Area Utility Classes */
+  .pt-safe {
+    padding-top: var(--safe-area-top);
+  }
+
+  .pb-safe {
+    padding-bottom: var(--safe-area-bottom);
+  }
+
+  .pl-safe {
+    padding-left: var(--safe-area-left);
+  }
+
+  .pr-safe {
+    padding-right: var(--safe-area-right);
+  }
+
+  .top-safe {
+    top: var(--safe-area-top);
+  }
+
+  /* Telegram Content Safe Area Utility Classes (matching the tg-content-safe-area from screenshot) */
+  .pt-content-safe {
+    padding-top: var(--content-safe-area-top);
+  }
+
+  .pb-content-safe {
+    padding-bottom: var(--content-safe-area-bottom);
+  }
+
+  /* Disable heavy animations for users or low-power modes requesting reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

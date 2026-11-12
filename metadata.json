@@ -1,0 +1,6 @@
+{
+  "name": "OFFpolice | Digital Business Card",
+  "description": "Interactive responsive digital business card for OFFpolice with Telegram, Instagram, and X social links, dark/light theme, and multi-language localization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
