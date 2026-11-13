@@ -23,33 +23,65 @@ const fadeVariants = {
   },
 };
 
-function getInitialTab(): AppTab {
+function getBasePath(): string {
   try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('tab') === 'feed' ? 'feed' : 'card';
+    const { hostname, pathname } = window.location;
+    if (hostname.endsWith('.github.io')) {
+      const parts = pathname.split('/').filter(Boolean);
+      if (parts.length > 0 && parts[0] === 'offpolice.pro') {
+        return '/offpolice.pro/';
+      }
+    }
   } catch {
-    return 'card';
+    // Ignore location access issues
   }
+  return '/';
+}
+
+function getTabFromLocation(): AppTab {
+  try {
+    const path = window.location.pathname.replace(/\/+$/, '');
+    if (path.endsWith('/blog')) {
+      return 'feed';
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tab') === 'feed') {
+      return 'feed';
+    }
+  } catch {
+    // Ignore URL parsing errors
+  }
+  return 'card';
 }
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
-  const [activeTab, setActiveTab] = useState<AppTab>(getInitialTab);
+  const [activeTab, setActiveTab] = useState<AppTab>(getTabFromLocation);
 
   // Initialize Telegram WebApp SDK & Safe Area insets
   useTelegramWebApp(theme);
 
+  React.useEffect(() => {
+    const handlePopState = () => {
+      setActiveTab(getTabFromLocation());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const handleTabChange = (tab: AppTab) => {
     setActiveTab(tab);
     try {
-      const url = new URL(window.location.href);
-      if (tab === 'feed') {
-        url.searchParams.set('tab', 'feed');
-      } else {
-        url.searchParams.delete('tab');
+      const base = getBasePath();
+      const targetPath = tab === 'feed' ? `${base}blog` : base;
+      const params = new URLSearchParams(window.location.search);
+      params.delete('tab');
+      const search = params.toString();
+      const nextUrl = `${targetPath}${search ? `?${search}` : ''}${window.location.hash}`;
+      if (window.location.pathname + window.location.search + window.location.hash !== nextUrl) {
+        window.history.pushState({ tab }, '', nextUrl);
       }
-      window.history.replaceState(null, '', url.toString());
     } catch {
       // Ignore history API restrictions
     }

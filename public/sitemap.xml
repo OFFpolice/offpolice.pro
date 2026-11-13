@@ -11,4 +11,10 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://offpolice.pro/?lang=ru" />
     <xhtml:link rel="alternate" hreflang="uk" href="https://offpolice.pro/?lang=uk" />
   </url>
+  <url>
+    <loc>https://offpolice.pro/blog</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

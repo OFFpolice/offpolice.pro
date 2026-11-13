@@ -1,5 +1,5 @@
 import React from 'react';
-import { IdCard, Newspaper } from 'lucide-react';
+import { IdCard, GalleryVerticalEnd } from 'lucide-react';
 import { AppTab, Translations } from '../types';
 
 interface FloatingNavbarProps {
@@ -32,7 +32,7 @@ export const FloatingNavbar: React.FC<FloatingNavbarProps> = ({
     {
       id: 'feed',
       label: t.navFeed,
-      icon: <Newspaper className="w-5 h-5 shrink-0" />,
+      icon: <GalleryVerticalEnd className="w-5 h-5 shrink-0" />,
     },
   ];
 
