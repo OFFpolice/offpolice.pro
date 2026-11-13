@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Theme } from '../types';
 
 interface TelegramSafeAreaInsets {
@@ -55,6 +55,13 @@ interface TelegramWebApp {
     impactOccurred?: (style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => void;
     notificationOccurred?: (type: 'error' | 'success' | 'warning') => void;
     selectionChanged?: () => void;
+  };
+  BackButton?: {
+    isVisible?: boolean;
+    show?: () => void;
+    hide?: () => void;
+    onClick?: (callback: () => void) => void;
+    offClick?: (callback: () => void) => void;
   };
 }
 
@@ -252,4 +259,69 @@ export function useTelegramWebApp(theme: Theme): boolean {
   }, [theme]);
 
   return isTelegram;
+}
+
+export function useTelegramBackButton(visible: boolean, onBack: () => void): void {
+  const onBackRef = useRef(onBack);
+
+  useEffect(() => {
+    onBackRef.current = onBack;
+  }, [onBack]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const tg = window.Telegram?.WebApp;
+    const backButton = tg?.BackButton;
+    if (!tg || !backButton) return;
+
+    const supportsBackButton = (() => {
+      try {
+        return typeof tg.isVersionAtLeast !== 'function' || tg.isVersionAtLeast('6.1');
+      } catch {
+        return true;
+      }
+    })();
+
+    if (!supportsBackButton) return;
+
+    const handleBackClick = () => {
+      try {
+        tg.HapticFeedback?.selectionChanged?.();
+      } catch {
+        // Ignore haptic errors
+      }
+      onBackRef.current();
+    };
+
+    try {
+      if (visible) {
+        if (typeof backButton.onClick === 'function') {
+          backButton.onClick(handleBackClick);
+        } else if (typeof tg.onEvent === 'function') {
+          tg.onEvent('backButtonClicked', handleBackClick);
+        }
+        if (typeof backButton.show === 'function') {
+          backButton.show();
+        }
+      } else {
+        if (typeof backButton.hide === 'function') {
+          backButton.hide();
+        }
+      }
+    } catch (e) {
+      console.warn('Telegram BackButton sync error:', e);
+    }
+
+    return () => {
+      try {
+        if (typeof backButton.offClick === 'function') {
+          backButton.offClick(handleBackClick);
+        } else if (typeof tg.offEvent === 'function') {
+          tg.offEvent('backButtonClicked', handleBackClick);
+        }
+      } catch {
+        // Ignore cleanup errors
+      }
+    };
+  }, [visible]);
 }

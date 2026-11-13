@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { useTheme } from './hooks/useTheme';
 import { useLanguage } from './hooks/useLanguage';
-import { useTelegramWebApp } from './hooks/useTelegramWebApp';
+import { useTelegramWebApp, useTelegramBackButton } from './hooks/useTelegramWebApp';
 import { TRANSLATIONS } from './i18n/translations';
 import { AppTab } from './types';
 import { Header } from './components/Header';
@@ -70,7 +70,7 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const handleTabChange = (tab: AppTab) => {
+  const handleTabChange = useCallback((tab: AppTab) => {
     setActiveTab(tab);
     try {
       const base = getBasePath();
@@ -85,7 +85,18 @@ export default function App() {
     } catch {
       // Ignore history API restrictions
     }
-  };
+  }, []);
+
+  const handleTelegramBack = useCallback(() => {
+    if (window.history.state?.tab === 'feed') {
+      window.history.back();
+    } else {
+      handleTabChange('card');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [handleTabChange]);
+
+  useTelegramBackButton(activeTab === 'feed', handleTelegramBack);
 
   const t = TRANSLATIONS[language];
 
