@@ -70,7 +70,7 @@ export default function App() {
       />
 
       {/* Main Content Layout */}
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 md:pl-44 xl:pl-6 pl-safe pr-safe pt-6 sm:pt-8 pb-12 space-y-6 sm:space-y-7">
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 md:pl-24 lg:pl-6 pl-safe pr-safe pt-6 sm:pt-8 pb-12 space-y-6 sm:space-y-7">
         {activeTab === 'card' ? (
           <>
             {/* Profile Card with smooth entrance */}
