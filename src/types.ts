@@ -54,6 +54,8 @@ export interface Translations {
   themeToggle: string;
   languageSelect: string;
   footerRights: string;
+  footerHome: string;
+  footerBlog: string;
   verifiedBadge: string;
   navLabel: string;
   navCard: string;

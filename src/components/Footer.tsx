@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-3xl mx-auto px-4 sm:px-6 md:pl-24 lg:pl-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Copyright & domain link */}
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-0.5">
-          <p className="text-zinc-700 dark:text-zinc-300 font-medium">
+          <p className="text-zinc-700 dark:text-zinc-300 font-medium flex flex-wrap items-center justify-center sm:justify-start gap-x-1.5">
             <a
               id="footer-domain-link"
               href="https://offpolice.pro/"
@@ -70,7 +70,28 @@ export const Footer: React.FC<FooterProps> = ({
             >
               OFFpolice.pro
             </a>
-            . {t.footerRights}
+            <span aria-hidden="true" className="text-zinc-400 dark:text-zinc-600">·</span>
+            <span>{t.footerRights}</span>
+            <span aria-hidden="true" className="text-zinc-400 dark:text-zinc-600">·</span>
+            <a
+              id="footer-home-link"
+              href="https://offpolice.pro/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-800 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
+            >
+              {t.footerHome}
+            </a>
+            <span aria-hidden="true" className="text-zinc-400 dark:text-zinc-600">·</span>
+            <a
+              id="footer-blog-link"
+              href="https://offpolice.pro/blog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-800 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
+            >
+              {t.footerBlog}
+            </a>
           </p>
           <span className="text-zinc-500 dark:text-zinc-400">
             © {new Date().getFullYear()}
