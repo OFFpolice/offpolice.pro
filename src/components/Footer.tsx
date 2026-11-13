@@ -55,9 +55,9 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <footer
       id="app-footer"
-      className="w-full mt-10 pt-6 pb-[max(1.5rem,calc(1.5rem+var(--safe-area-bottom)))] border-t border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-500 dark:text-zinc-400 font-mono"
+      className="w-full mt-10 pt-6 pb-[calc(5.75rem+var(--safe-area-bottom))] md:pb-[max(1.5rem,calc(1.5rem+var(--safe-area-bottom)))] border-t border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-500 dark:text-zinc-400 font-mono"
     >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 md:pl-44 xl:pl-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Copyright & domain link */}
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-0.5">
           <p className="text-zinc-700 dark:text-zinc-300 font-medium">

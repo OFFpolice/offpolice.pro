@@ -4,10 +4,13 @@ import { useTheme } from './hooks/useTheme';
 import { useLanguage } from './hooks/useLanguage';
 import { useTelegramWebApp } from './hooks/useTelegramWebApp';
 import { TRANSLATIONS } from './i18n/translations';
+import { AppTab } from './types';
 import { Header } from './components/Header';
+import { FloatingNavbar } from './components/FloatingNavbar';
 import { ProfileCard } from './components/ProfileCard';
 import { ProjectsCards } from './components/ProjectsCards';
 import { SocialCards } from './components/SocialCards';
+import { FeedSection } from './components/FeedSection';
 import { Footer } from './components/Footer';
 
 // Lightweight animation configuration optimized for low-power and weak mobile GPUs
@@ -16,16 +19,41 @@ const fadeVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.25, ease: 'easeOut' },
+    transition: { duration: 0.2, ease: 'easeOut' },
   },
 };
+
+function getInitialTab(): AppTab {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('tab') === 'feed' ? 'feed' : 'card';
+  } catch {
+    return 'card';
+  }
+}
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
+  const [activeTab, setActiveTab] = useState<AppTab>(getInitialTab);
 
   // Initialize Telegram WebApp SDK & Safe Area insets
   useTelegramWebApp(theme);
+
+  const handleTabChange = (tab: AppTab) => {
+    setActiveTab(tab);
+    try {
+      const url = new URL(window.location.href);
+      if (tab === 'feed') {
+        url.searchParams.set('tab', 'feed');
+      } else {
+        url.searchParams.delete('tab');
+      }
+      window.history.replaceState(null, '', url.toString());
+    } catch {
+      // Ignore history API restrictions
+    }
+  };
 
   const t = TRANSLATIONS[language];
 
@@ -34,36 +62,59 @@ export default function App() {
       {/* Header Bar */}
       <Header />
 
+      {/* Responsive Floating Navigation Bar (bottom on mobile, top-left vertical on desktop) */}
+      <FloatingNavbar
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+        t={t}
+      />
+
       {/* Main Content Layout */}
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 pl-safe pr-safe pt-6 sm:pt-8 pb-12 space-y-6 sm:space-y-7">
-        {/* Profile Card with smooth entrance */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeVariants}
-        >
-          <ProfileCard t={t} />
-        </motion.div>
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 md:pl-44 xl:pl-6 pl-safe pr-safe pt-6 sm:pt-8 pb-12 space-y-6 sm:space-y-7">
+        {activeTab === 'card' ? (
+          <>
+            {/* Profile Card with smooth entrance */}
+            <motion.div
+              key="card-profile"
+              initial="hidden"
+              animate="visible"
+              variants={fadeVariants}
+            >
+              <ProfileCard t={t} />
+            </motion.div>
 
-        {/* Projects Section */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-20px' }}
-          variants={fadeVariants}
-        >
-          <ProjectsCards language={language} t={t} />
-        </motion.div>
+            {/* Projects Section */}
+            <motion.div
+              key="card-projects"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-20px' }}
+              variants={fadeVariants}
+            >
+              <ProjectsCards language={language} t={t} />
+            </motion.div>
 
-        {/* Social Network Cards (Telegram, Instagram, X) with scroll animation */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-20px' }}
-          variants={fadeVariants}
-        >
-          <SocialCards language={language} t={t} />
-        </motion.div>
+            {/* Social Network Cards (Telegram, Instagram, X) with scroll animation */}
+            <motion.div
+              key="card-social"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-20px' }}
+              variants={fadeVariants}
+            >
+              <SocialCards language={language} t={t} />
+            </motion.div>
+          </>
+        ) : (
+          <motion.div
+            key="feed-view"
+            initial="hidden"
+            animate="visible"
+            variants={fadeVariants}
+          >
+            <FeedSection language={language} t={t} />
+          </motion.div>
+        )}
       </main>
 
       {/* Footer with Theme & Language controls */}
