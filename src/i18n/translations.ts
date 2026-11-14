@@ -18,6 +18,22 @@ export const SOCIAL_LINKS: SocialLink[] = [
     },
   },
   {
+    id: 'telegram-channel',
+    name: 'Telegram Channel',
+    handle: '@BroadcastOFF',
+    url: 'https://t.me/BroadcastOFF',
+    badge: {
+      en: 'Channel',
+      ru: 'Канал',
+      uk: 'Канал',
+    },
+    description: {
+      en: 'Official channel with news, updates, and vlog posts.',
+      ru: 'Официальный канал: новости, обновления и публикации.',
+      uk: 'Офіційний канал: новини, оновлення та публікації.',
+    },
+  },
+  {
     id: 'instagram',
     name: 'Instagram',
     handle: '@offpolice2077',

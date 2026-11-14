@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Send,
+  Megaphone,
   Instagram,
   Copy,
   Check,
@@ -31,6 +32,8 @@ export const SocialCards: React.FC<SocialCardsProps> = ({ language, t }) => {
     switch (id) {
       case 'telegram':
         return <Send className="w-4 h-4 text-zinc-900 dark:text-zinc-100" />;
+      case 'telegram-channel':
+        return <Megaphone className="w-4 h-4 text-zinc-900 dark:text-zinc-100" />;
       case 'instagram':
         return <Instagram className="w-4 h-4 text-zinc-900 dark:text-zinc-100" />;
       case 'x':

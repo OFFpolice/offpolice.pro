@@ -190,7 +190,7 @@ export const FeedSection: React.FC<FeedSectionProps> = ({ language, t }) => {
           {t.feedFollowTitle}
         </span>
         <a
-          href="https://telegram.me/OFFpolice"
+          href="https://t.me/BroadcastOFF"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 transition-colors cursor-pointer whitespace-nowrap shrink-0"

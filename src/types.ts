@@ -3,7 +3,7 @@ export type Language = 'en' | 'ru' | 'uk';
 export type Theme = 'light' | 'dark';
 
 export interface SocialLink {
-  id: 'telegram' | 'instagram' | 'x';
+  id: 'telegram' | 'telegram-channel' | 'instagram' | 'x';
   name: string;
   handle: string;
   url: string;
